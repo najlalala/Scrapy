@@ -1,7 +1,7 @@
 import scrapy
 import pandas as pd
 
-class ShiqaSpider(scrapy.Spider):
+class najlaSpider(scrapy.Spider):
     name = "najla"
 
     start_urls = ["https://store.playstation.com/en-id/category/05a2d027-cedc-4ac0-abeb-8fc26fec7180/"]
@@ -15,3 +15,8 @@ class ShiqaSpider(scrapy.Spider):
                 "Nama Game": title.strip(),
                 "Harga Game": price.strip()
             }
+        
+        
+        for i in range (1,17):
+            next_url = f"https://store.playstation.com/en-id/category/05a2d027-cedc-4ac0-abeb-8fc26fec7180/{i}"
+            yield scrapy.Request(next_url, callback=self.parse)
